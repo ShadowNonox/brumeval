@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, user-scalable=no">
+<title>Brumeval</title>
+<meta name="description" content="Brumeval : une aventure douce au cœur de la brume. Récolte, aide les villageois et rallume le Cristal !">
+<meta name="theme-color" content="#2f5d4a">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💎</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;600;700&family=Nunito:wght@600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="game"></canvas>
+
+<!-- HUD -->
+<div id="hud" class="hidden">
+  <div class="hud-left">
+    <div class="vitals"><div id="hearts" class="hearts"></div><button id="potions" class="pill potion-pill" title="Boire un élixir (H)">🧪 <b id="potion-n">0</b></button></div>
+    <div id="quest-card" class="panel quest-card"></div>
+  </div>
+  <div id="boss" class="boss hidden"><b>🐉 Ignar, le Dragon des Cendres</b><div class="boss-bar"><div id="boss-fill"></div></div></div>
+  <div class="hud-right">
+    <div class="pills">
+      <div class="pill" title="Pièces"><span>🪙</span><b id="coins">0</b></div>
+      <div class="pill" title="Heure"><span id="clock-ico">☀️</span><b id="clock">08:00</b></div>
+    </div>
+    <div class="hud-buttons">
+      <button class="hbtn" id="btn-journal" title="Journal (J)">📜</button>
+      <button class="hbtn" id="btn-bag" title="Sac (I)">🎒</button>
+      <button class="hbtn" id="btn-map" title="Carte (M)">🗺️</button>
+      <button class="hbtn" id="btn-menu" title="Options (Échap)">⚙️</button>
+    </div>
+    <canvas id="minimap" width="216" height="162"></canvas>
+  </div>
+  <div id="hotbar" class="hotbar"></div>
+</div>
+
+<!-- Contrôles tactiles -->
+<div id="touch" class="hidden">
+  <div id="joy" class="joy hidden"><div id="joy-knob" class="joy-knob"></div></div>
+  <button id="act-btn" class="act-btn">✋</button>
+  <button id="atk-btn" class="act-btn atk">⚔️</button>
+  <button id="pot-btn" class="act-btn pot">🧪</button>
+</div>
+
+<!-- Dialogue -->
+<div id="dialog" class="dialog hidden">
+  <div id="dlg-portrait" class="portrait"></div>
+  <div class="dlg-main">
+    <div class="dlg-name"><b id="dlg-name"></b> <small id="dlg-role"></small></div>
+    <div id="dlg-text" class="dlg-text"></div>
+    <div id="dlg-choices" class="dlg-choices"></div>
+  </div>
+  <div id="dlg-next" class="dlg-next">▼</div>
+</div>
+
+<!-- Fenêtres -->
+<div id="modal" class="modal hidden">
+  <div class="panel modal-card">
+    <button class="close" id="modal-close" aria-label="Fermer">✕</button>
+    <h2 id="modal-title"></h2>
+    <div id="modal-body"></div>
+  </div>
+</div>
+
+<div id="toasts" class="toasts"></div>
+<div id="hurt" class="hurt"></div>
+
+<!-- Écran titre -->
+<div id="title" class="title">
+  <div class="title-inner">
+    <div class="logo-gem">💎</div>
+    <h1>Brumeval</h1>
+    <p class="tagline">Une aventure douce au cœur de la brume</p>
+    <div class="title-buttons">
+      <button class="btn btn-big btn-gold hidden" id="btn-continue">Continuer</button>
+      <button class="btn btn-big" id="btn-new">Nouvelle partie</button>
+    </div>
+    <div class="controls-help" id="controls-help">
+      <span><kbd>ZQSD</kbd> / <kbd>WASD</kbd> / flèches : se déplacer</span>
+      <span><kbd>E</kbd> ou <kbd>Espace</kbd> : interagir (maintenir pour récolter)</span>
+      <span><kbd>F</kbd> ou clic : coup d'épée · <kbd>H</kbd> : boire un élixir</span>
+      <span><kbd>J</kbd> journal · <kbd>I</kbd> sac · <kbd>M</kbd> carte</span>
+    </div>
+  </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>
